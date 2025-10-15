@@ -5,7 +5,7 @@ function auth(req, res, next){
     if (!token) return res.status(401).json({msg: 'Sem token, acesso negado'});
 
     try{
-        const decode = jwt.verify(token, process.env.JWT_SECRET);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
         req.user = decoded;
         next();
     }catch (err){
