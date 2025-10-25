@@ -1,28 +1,15 @@
-// server.js
-// Arquivo principal do servidor Node.js (Express)
+const express = require('express');
+const connectDB = require('./config/db');
+const dotenv = require('dotenv');
 
-const express = require('express')
-const dotenv = require('dotenv')
-const connectDB = require('./config/db')
+dotenv.config();
+connectDB();
 
-// Carrega variáveis de ambiente do .env
-dotenv.config()
+const app = express();
+app.use(express.json());
 
-// Conecta ao MongoDB
-connectDB()
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/students', require('./routes/students'));
 
-// Inicializa o Express
-const app = express()
-
-// Middleware para permitir JSON nas requisições
-app.use(express.json())
-
-// Importa rotas e registra prefixos
-app.use('/api/auth', require('./routes/auth'))
-app.use('/api/students', require('./routes/students'))
-
-// Define porta padrão
-const PORT = process.env.PORT || 5000
-
-// Inicia o servidor
-app.listen(PORT, () => console.log(`🚀 Servidor rodando na porta ${PORT}`))
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));

@@ -16,7 +16,7 @@ mongoose.connect(process.env.MONGO_URL)
 // Função principal que cria um admin
 const createAdmin = async () => {
   try {
-    const existing = await User.findOne({ email: 'admin@escola.com' })
+    const existing = await User.findOne({ email: 'jonas@escola.com' })
     if (existing) {
       console.log('⚠️ Usuário admin já existe!')
       process.exit()
@@ -24,9 +24,9 @@ const createAdmin = async () => {
 
     // Cria novo usuário admin
     const admin = new User({
-      name: 'Admin',
-      email: 'admin@escola.com',
-      password: '123456', // será criptografada automaticamente
+      name: 'jonas',
+      email: 'jonas@escola.com',
+      password: '123', // será criptografada automaticamente
     })
 
     await admin.save()
